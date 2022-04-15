@@ -47,7 +47,7 @@ func main() {
 
 	sch.Start()
 
-	d, err := time.ParseDuration("99h")
+	d, err := time.ParseDuration("96h")
 	if err != nil {
 		log.Fatalf("Cannot parse duration Got: %v", err)
 	}
