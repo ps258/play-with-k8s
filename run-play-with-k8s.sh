@@ -7,5 +7,5 @@ docker pull franela/dind
 docker swarm init
 sudo modprobe xt_ipvs
 docker-compose up -d
-docker-compose log -f
+docker-compose logs -f
 docker-compose down
