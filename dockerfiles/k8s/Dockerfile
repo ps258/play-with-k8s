@@ -3,8 +3,6 @@ FROM centos:7
 COPY ./systemctl /usr/bin/systemctl
 COPY ./kubernetes.repo /etc/yum.repos.d/
 
-
-
 RUN yum install -y kubectl-1.20.1 kubeadm-1.20.1 kubelet-1.20.1 \
     #&& mv -f /etc/systemd/system/kubelet.service.d/10-kubeadm.conf /etc/systemd/system/kubelet.service \
     && yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo \
@@ -15,7 +13,6 @@ RUN yum install -y kubectl-1.20.1 kubeadm-1.20.1 kubelet-1.20.1 \
 RUN curl -Lf -o /usr/bin/jq https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64 \
     && curl -Lf -o /usr/bin/docker-compose https://github.com/docker/compose/releases/download/1.21.0/docker-compose-$(uname -s)-$(uname -m) \
     && chmod +x /usr/bin/jq /usr/bin/docker-compose 
-
 
 VOLUME ["/var/lib/kubelet"]
 
@@ -29,7 +26,8 @@ COPY ./docker.service /usr/lib/systemd/system/
 COPY motd /etc/motd
 
 RUN echo $'cat /etc/motd \n\
-export PS1="[\h \W]$ "' >> /root/.bash_profile
+alias k=kubectl \n\
+export PS1="[\h \W]# "' >> /root/.bash_profile
 
 RUN echo 'source <(kubectl completion bash)' >>~/.bashrc \
     && kubectl completion bash >> /etc/bash_completion.d/kubectl
