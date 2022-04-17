@@ -11,7 +11,7 @@ cd "$SCRIPTDIR"
 pwk8slatest=$(docker image list pwk8s:latest | awk '/pwk8s/')
 if [[ -z $pwk8slatest ]]; then
   echo "[INFO]Building the docker image pwk8s:latest"
-  cd "$SCRIPTDIR/dockerfiles/k8s"
+  cd "$SCRIPTDIR/dockerfiles/pwk8s"
   docker build --tag pwk8s .
   cd -
 fi
