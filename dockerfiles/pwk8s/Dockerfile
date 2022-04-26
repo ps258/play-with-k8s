@@ -6,7 +6,7 @@ COPY ./kubernetes.repo /etc/yum.repos.d/
 RUN yum install -y kubectl-1.20.1 kubeadm-1.20.1 kubelet-1.20.1 \
     #&& mv -f /etc/systemd/system/kubelet.service.d/10-kubeadm.conf /etc/systemd/system/kubelet.service \
     && yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo \
-    && yum install -y docker-ce git bash-completion vim\
+    && yum install -y docker-ce git bash-completion docker-compose openssl vim\
     && sed -i -e '4d;5d;8d' /lib/systemd/system/docker.service \
     && yum clean all
 
